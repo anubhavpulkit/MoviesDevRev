@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E60519C62B84CE6D0073D752 /* NetworkingKit in Frameworks */ = {isa = PBXBuildFile; productRef = E60519C52B84CE6D0073D752 /* NetworkingKit */; };
 		E6D8B19C2B836991006F43CF /* MovieDevRevApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D8B19B2B836991006F43CF /* MovieDevRevApp.swift */; };
 		E6D8B19E2B836991006F43CF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D8B19D2B836991006F43CF /* ContentView.swift */; };
 		E6D8B1A02B836992006F43CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6D8B19F2B836992006F43CF /* Assets.xcassets */; };
@@ -93,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E60519C62B84CE6D0073D752 /* NetworkingKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +248,9 @@
 			dependencies = (
 			);
 			name = MovieDevRev;
+			packageProductDependencies = (
+				E60519C52B84CE6D0073D752 /* NetworkingKit */,
+			);
 			productName = MovieDevRev;
 			productReference = E6D8B1982B836991006F43CF /* MovieDevRev.app */;
 			productType = "com.apple.product-type.application";
@@ -318,6 +323,9 @@
 				Base,
 			);
 			mainGroup = E6D8B18F2B836991006F43CF;
+			packageReferences = (
+				E60519C42B84CE6D0073D752 /* XCRemoteSwiftPackageReference "NetworkingKit" */,
+			);
 			productRefGroup = E6D8B1992B836991006F43CF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -714,6 +722,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E60519C42B84CE6D0073D752 /* XCRemoteSwiftPackageReference "NetworkingKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/anubhavpulkit/NetworkingKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E60519C52B84CE6D0073D752 /* NetworkingKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E60519C42B84CE6D0073D752 /* XCRemoteSwiftPackageReference "NetworkingKit" */;
+			productName = NetworkingKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E6D8B1902B836991006F43CF /* Project object */;
 }

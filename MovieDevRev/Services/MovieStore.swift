@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import NetworkingKit
 
 class MovieStore: MovieService {
     
@@ -21,7 +22,7 @@ class MovieStore: MovieService {
         guard let url = URL(string: "\(baseAPIURL)/movie/\(endpoint.rawValue)") else {
             throw MovieError.invalidEndpoint
         }
-        let movieResponse: MovieResponse = try await self.loadURLAndDecode(url: url)
+        let movieResponse: MovieResponse = try await loadURLAndDecode(url: url, apiKey: apiKey)
         return movieResponse.results
     }
     
@@ -29,33 +30,8 @@ class MovieStore: MovieService {
         guard let url = URL(string: "\(baseAPIURL)/movie/\(id)") else {
             throw MovieError.invalidEndpoint
         }
-        return try await self.loadURLAndDecode(url: url, params: [
-            "append_to_response": "videos,credits"
+        return try await loadURLAndDecode(url: url, apiKey: apiKey, params: [
+                        "append_to_response": "videos,credits"
         ])
     }
-    
-    private func loadURLAndDecode<D: Decodable>(url: URL, params: [String: String]? = nil) async throws -> D {
-        guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
-            throw MovieError.invalidEndpoint
-        }
-        
-        var queryItems = [URLQueryItem(name: "api_key", value: apiKey)]
-        if let params = params {
-            queryItems.append(contentsOf: params.map { URLQueryItem(name: $0.key, value: $0.value) })
-        }
-        
-        urlComponents.queryItems = queryItems
-        
-        guard let finalURL = urlComponents.url else {
-            throw MovieError.invalidEndpoint
-        }
-        
-        let (data, response) = try await urlSession.data(from: finalURL)
-        
-        guard let httpResponse = response as? HTTPURLResponse, 200..<300 ~= httpResponse.statusCode else {
-            throw MovieError.invalidResponse
-        }
-        return try self.jsonDecoder.decode(D.self, from: data)
-    }
-
 }

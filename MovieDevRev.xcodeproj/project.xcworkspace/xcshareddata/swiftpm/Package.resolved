@@ -1,12 +1,12 @@
 {
   "pins" : [
     {
-      "identity" : "gjourney",
+      "identity" : "networkingkit",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/anubhavpulkit/GJourney.git",
+      "location" : "https://github.com/anubhavpulkit/NetworkingKit.git",
       "state" : {
-        "branch" : "main",
-        "revision" : "27eff96215243dfddf04d2b7b59841f6a5de24ee"
+        "revision" : "73f9a2bac014722dd3ea85b9cf70b5dd1d8bccde",
+        "version" : "0.0.3"
       }
     }
   ],
