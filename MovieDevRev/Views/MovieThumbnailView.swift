@@ -8,22 +8,22 @@
 import SwiftUI
 
 enum MovieThumbnailType {
-    case poster(showTitle: Bool = true)
-    case backdrop
+    case latest(showTitle: Bool = true)
+    case popular
 }
 
 struct MovieThumbnailView: View {
     let movie: Movie
-    var thumbnailType: MovieThumbnailType = .poster()
+    var thumbnailType: MovieThumbnailType = .latest()
     @StateObject var imageLoader = ImageLoader()
     
     var body: some View {
         containerView
             .onAppear {
                 switch thumbnailType {
-                case .poster:
+                case .latest:
                     imageLoader.loadImage(with: movie.posterURL)
-                case .backdrop:
+                case .popular:
                     imageLoader.loadImage(with: movie.backdropURL)
                 }
             }
@@ -40,7 +40,7 @@ struct MovieThumbnailView: View {
     private var textView: some View {
         HStack{
             Text(movie.title + " :")
-            if case .poster(let showTitle) = thumbnailType {
+            if case .latest(let showTitle) = thumbnailType {
                 Text(movie.yearText)
             } else {
                 Text(movie.scoreText)
@@ -51,7 +51,7 @@ struct MovieThumbnailView: View {
     private var imageView: some View {
         ZStack {
             Color.gray.opacity(0.3)
-            if case .poster(let showTitle) = thumbnailType, showTitle {
+            if case .latest(let showTitle) = thumbnailType, showTitle {
                 Text(movie.title)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)

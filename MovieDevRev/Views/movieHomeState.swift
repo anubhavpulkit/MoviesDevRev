@@ -13,7 +13,7 @@ struct MovieHomeView: View {
     var body: some View {
         TabView {
             ForEach(movieHomeState.sections) { section in
-                MovieThumbnailCarouselView(
+                MovieThumbnailGridView(
                     title: section.title,
                     movies: section.movies,
                     thumbnailType: section.thumbnailType)

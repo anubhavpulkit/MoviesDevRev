@@ -27,9 +27,9 @@ fileprivate extension MovieListEndpoint {
     var thumbnailType: MovieThumbnailType {
         switch self {
         case .nowPlaying:
-            return .poster()
+            return .latest()
         default:
-            return .backdrop
+            return .popular
         }
     }
     

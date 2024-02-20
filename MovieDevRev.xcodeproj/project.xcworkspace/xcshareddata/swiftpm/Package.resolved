@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "gjourney",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/anubhavpulkit/GJourney.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "27eff96215243dfddf04d2b7b59841f6a5de24ee"
+      }
+    }
+  ],
+  "version" : 2
+}
