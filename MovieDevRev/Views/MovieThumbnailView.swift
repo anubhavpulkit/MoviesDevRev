@@ -22,9 +22,9 @@ struct MovieThumbnailView: View {
             .onAppear {
                 switch thumbnailType {
                 case .latest:
-                    imageLoader.loadImage(with: movie.posterURL)
+                    imageLoader.loadImage(with: movie.latestURL)
                 case .popular:
-                    imageLoader.loadImage(with: movie.backdropURL)
+                    imageLoader.loadImage(with: movie.popularURL)
                 }
             }
     }
@@ -40,7 +40,7 @@ struct MovieThumbnailView: View {
     private var textView: some View {
         HStack{
             Text(movie.title + " :")
-            if case .latest(let showTitle) = thumbnailType {
+            if case .latest(_) = thumbnailType {
                 Text(movie.yearText)
             } else {
                 Text(movie.scoreText)

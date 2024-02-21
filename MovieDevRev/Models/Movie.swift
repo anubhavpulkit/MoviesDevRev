@@ -49,13 +49,11 @@ struct Movie: Decodable, Identifiable, Hashable {
         return formatter
     }()
     
-    #warning("Top")
-    var backdropURL: URL {
+    var popularURL: URL {
         return URL(string: "https://image.tmdb.org/t/p/w500\(backdropPath ?? "")")!
     }
     
-#warning("New")
-    var posterURL: URL {
+    var latestURL: URL {
         return URL(string: "https://image.tmdb.org/t/p/w500\(posterPath ?? "")")!
     }
     

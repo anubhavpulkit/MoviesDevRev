@@ -13,14 +13,16 @@ struct MovieDetailView: View {
     let movieTitle: String
     @StateObject private var movieDetailState = MovieDetailState()
     @State private var selectedTrailerURL: URL?
+    @StateObject var imageLoader = ImageLoader()
     
     var body: some View {
         List {
             if let movie = movieDetailState.movie {
-                MovieDetailImage(imageURL: movie.backdropURL)
+                MovieDetailImage(imageURL: movie.popularURL)
                     .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                    .aspectRatio(16/9, contentMode: .fill)
                     .listRowSeparator(.hidden)
-                
+                    
                 MovieDetailListView(movie: movie, selectedTrailerURL: $selectedTrailerURL)
             }
         }
@@ -41,10 +43,9 @@ struct MovieDetailView: View {
 }
 
 struct MovieDetailListView: View {
-    
     let movie: Movie
     @Binding var selectedTrailerURL: URL?
-    
+    @StateObject private var movieDetailState = MovieDetailState()
     var body: some View {
         movieDescriptionSection.listRowSeparator(.visible)
         movieCastSection.listRowSeparator(.hidden)
@@ -53,15 +54,25 @@ struct MovieDetailListView: View {
     
     private var movieDescriptionSection: some View {
         VStack(alignment: .leading, spacing: 16) {
+            HStack {
+                MovieDetailImage(imageURL: movie.latestURL)
+                    .aspectRatio(9/16, contentMode: .fit)
+                    .frame(height: 120)
+                Spacer()
+                HStack {
+                    if !movie.ratingText.isEmpty {
+                        Text(movie.ratingText).foregroundColor(.yellow)
+                    }
+                    Text(movie.scoreText)
+                }.padding(.horizontal, 4)
+                .background(Color.white)
+                .cornerRadius(3.0)
+            }.offset(y: -42)
+            .frame(height: 30)
             Text(movieGenreYearDurationText)
                 .font(.headline)
+                .listRowSeparator(.hidden)
             Text(movie.overview)
-            HStack {
-                if !movie.ratingText.isEmpty {
-                    Text(movie.ratingText).foregroundColor(.yellow)
-                }
-                Text(movie.scoreText)
-            }
         }
         .padding(.vertical)
     }
@@ -135,14 +146,13 @@ struct MovieDetailImage: View {
     let imageURL: URL
     
     var body: some View {
-        ZStack {
-            Color.gray.opacity(0.3)
+        VStack{
             if let image = imageLoader.image {
                 Image(uiImage: image)
                     .resizable()
+                    .cornerRadius(3)
             }
-        }
-        .aspectRatio(16/9, contentMode: .fit)
+        }.cornerRadius(3)
         .onAppear { imageLoader.loadImage(with: imageURL) }
     }
 }

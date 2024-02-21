@@ -30,8 +30,7 @@ struct MovieHomeView: View {
             retryAction: { loadMovies(invalidateCache: true) })
         )
     }
-    
-    @Sendable
+        
     private func loadMovies(invalidateCache: Bool) {
         Task { await movieHomeState.loadMoviesFromAllEndpoints(invalidateCache: invalidateCache) }
     }
